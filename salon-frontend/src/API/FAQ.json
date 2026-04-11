@@ -1,0 +1,22 @@
+[
+    {
+        "id": 1,
+        "question": "How do I book a salon appointment online?",
+        "answer": "Simply select your services and preferred time slot, and confirm your booking. It's quick and easy!"
+    },
+    {
+        "id": 2,
+        "question": "Can I see salon reviews before booking?",
+        "answer": "Yes! Glow & Grace have genuine customer reviews and ratings to help you choose the best beauty services"
+    },
+    {
+        "id": 3,
+        "question": "What beauty services can I book?",
+        "answer": "You can book haircuts, styling, facials, waxing, manicure, pedicure, bridal makeup, spa treatments, and many more beauty services."
+    },
+    {
+        "id": 4,
+        "question": "Is online payment secure?",
+        "answer": "Absolutely! We use secure payment gateways to ensure your transactions are safe and protected."
+    }
+]

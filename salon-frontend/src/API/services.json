@@ -1,0 +1,50 @@
+[
+    {
+        "id": 1,
+        "title": "Haircut & Styling",
+        "img_url": "/images/salon6.jpg",
+        "body": "Professional haircut, hair styling, blow dry, and hair treatments for men and women"
+    },
+    {
+        "id": 2,
+        "title": "Beard Grooming",
+        "img_url": "/images/salon5.jpg",
+        "body": "Professional Beard Grooming Services That Combine Precision, Style, and Care for a Sharp and Confident Appearance."
+    },
+    {
+        "id": 3,
+        "title": "Hair Spa",
+        "img_url": "/images/salon13.jpg",
+        "body": "Indulge in a Luxurious Hair Spa for Deep Conditioning and Complete Hair Repair."
+    },
+    {
+        "id": 4,
+        "title": "Women Haircut",
+        "img_url": "/images/femalehair.jpg",
+        "body": "Redefine Your Look with Precision Haircuts Designed to Enhance Your Beauty and Confidence."
+    },
+    {
+        "id": 5,
+        "title": "Facial",
+        "img_url": "/images/salon7.jpg",
+        "body": "Relax, Refresh, and Reveal Your Natural Radiance with Deep Cleansing, Hydration, and Expert Skincare Care."
+    },
+    {
+        "id": 6,
+        "title": "Body Massage",
+        "img_url": "/images/salon9.jpg",
+        "body": "Recharge Your Skin and Soul with the Ultimate Spa Treatment."
+    },
+    {
+        "id": 7,
+        "title": "Manicure & Pedicure",
+        "img_url": "/images/manicure.jpg",
+        "body": "Classic and spa manicure pedicure services with nail art"
+    },
+    {
+        "id": 8,
+        "title": "Eyebrow",
+        "img_url": "/images/salon8.jpg",
+        "body": "Precision Eyebrow Grooming to Frame Your Face with Elegance and Confidence."
+    }
+]

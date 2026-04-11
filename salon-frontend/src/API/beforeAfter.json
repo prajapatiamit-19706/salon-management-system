@@ -1,0 +1,58 @@
+[
+  {
+    "id": "ba-hair-001",
+    "category": "hair",
+    "title": "Men Haircut Transformation",
+    "before": "/before.png",
+    "after": "/after.png"
+  },
+  {
+    "id": "ba-hair-002",
+    "category": "hair",
+    "title": "Hair Color & Styling",
+    "before": "/before-after/hair-before-2.jpg",
+    "after": "/before-after/hair-after-2.jpg"
+  },
+  {
+    "id": "ba-makeup-001",
+    "category": "makeup",
+    "title": "Bridal Makeup Look",
+    "before": "/before-after/makeup-before-1.jpg",
+    "after": "/before-after/makeup-after-1.jpg"
+  },
+  {
+    "id": "ba-makeup-002",
+    "category": "makeup",
+    "title": "Party Makeup Transformation",
+    "before": "/before-after/makeup-before-2.jpg",
+    "after": "/before-after/makeup-after-2.jpg"
+  },
+  {
+    "id": "ba-beard-001",
+    "category": "beard",
+    "title": "Beard Grooming & Shaping",
+    "before": "/before-after/beard-before-1.jpg",
+    "after": "/before-after/beard-after-1.jpg"
+  },
+  {
+    "id": "ba-beard-002",
+    "category": "beard",
+    "title": "Clean Beard Trim",
+    "before": "/before-after/beard-before-2.jpg",
+    "after": "/before-after/beard-after-2.jpg"
+  },
+  {
+    "id": "ba-skin-001",
+    "category": "skin",
+    "title": "Facial Glow Treatment",
+    "before": "/before-after/skin-before-1.jpg",
+    "after": "/before-after/skin-after-1.jpg"
+  },
+  {
+    "id": "ba-nails-001",
+    "category": "nails",
+    "title": "Luxury Nail Art",
+    "before": "/before-after/nails-before-1.jpg",
+    "after": "/before-after/nails-after-1.jpg"
+  }
+]

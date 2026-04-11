@@ -1,0 +1,290 @@
+/* ── Review Carousel ─────────────────────────────── */
+
+.rc-section {
+  padding: 5rem 1.5rem 4rem;
+  text-align: center;
+}
+
+.rc-heading {
+  font-size: 3.2rem;
+  font-weight: 800;
+  color: #0b3558;
+  margin: 0 0 0.5rem;
+  letter-spacing: -0.02em;
+}
+
+.rc-subheading {
+  font-size: 1.5rem;
+  color: #6b8a99;
+  margin: 0 0 3.5rem;
+}
+
+/* ── Carousel Layout ── */
+
+.rc-carousel-wrapper {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 1.5rem;
+  max-width: 900px;
+  margin: 0 auto;
+  position: relative;
+}
+
+/* ── Slide Animation ── */
+
+.rc-center {
+  flex: 0 0 380px;
+  z-index: 2;
+  transition: opacity 0.3s ease, transform 0.3s ease;
+}
+
+.rc-side {
+  flex: 0 0 220px;
+  cursor: pointer;
+  transition: opacity 0.3s ease, transform 0.3s ease;
+}
+
+/* Animating state: center card fades + shifts */
+.rc-carousel-wrapper--animating .rc-center {
+  opacity: 0;
+  transform: scale(0.92);
+}
+
+.rc-carousel-wrapper--animating.rc-carousel-wrapper--right .rc-center {
+  transform: translateX(-40px) scale(0.92);
+}
+
+.rc-carousel-wrapper--animating.rc-carousel-wrapper--left .rc-center {
+  transform: translateX(40px) scale(0.92);
+}
+
+/* Animating state: side cards slide toward center */
+.rc-carousel-wrapper--animating.rc-carousel-wrapper--right .rc-side--left {
+  opacity: 0;
+  transform: translateX(-30px);
+}
+
+.rc-carousel-wrapper--animating.rc-carousel-wrapper--right .rc-side--right {
+  transform: translateX(-30px);
+  opacity: 0.6;
+}
+
+.rc-carousel-wrapper--animating.rc-carousel-wrapper--left .rc-side--right {
+  opacity: 0;
+  transform: translateX(30px);
+}
+
+.rc-carousel-wrapper--animating.rc-carousel-wrapper--left .rc-side--left {
+  transform: translateX(30px);
+  opacity: 0.6;
+}
+
+/* ── Side cards (faded peek) ── */
+
+.rc-side:hover {
+  opacity: 0.85;
+}
+
+.rc-side--left .rc-card,
+.rc-side--right .rc-card {
+  transform: scale(0.88);
+  opacity: 0.4;
+  pointer-events: none;
+  filter: blur(1px);
+}
+
+/* ── Card ── */
+
+.rc-card {
+  background: #fff;
+  border: 2px solid #e4ecf0;
+  border-radius: 20px;
+  padding: 2.5rem 2rem;
+  text-align: center;
+  transition: all 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+  box-shadow: 0 4px 20px rgba(11, 53, 88, 0.06);
+}
+
+.rc-card--current {
+  border-color: #bfd6df;
+  box-shadow:
+    0 12px 40px rgba(11, 53, 88, 0.12),
+    0 0 0 1px rgba(11, 53, 88, 0.04);
+  transform: scale(1);
+  opacity: 1;
+}
+
+/* ── Avatar ── */
+
+.rc-avatar {
+  width: 56px;
+  height: 56px;
+  border-radius: 50%;
+  background: linear-gradient(135deg, #0b3558, #1a5276);
+  color: #fff;
+  font-size: 1.6rem;
+  font-weight: 700;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin: 0 auto 1.25rem;
+  letter-spacing: 0.05em;
+  box-shadow: 0 4px 12px rgba(11, 53, 88, 0.2);
+}
+
+/* ── Stars ── */
+
+.rc-stars {
+  display: flex;
+  justify-content: center;
+  gap: 0.25rem;
+  margin-bottom: 1rem;
+}
+
+.rc-star {
+  font-size: 1.8rem;
+  color: #d5dfe4;
+  line-height: 1;
+}
+
+.rc-star--filled {
+  color: #f39c12;
+  filter: drop-shadow(0 1px 3px rgba(243, 156, 18, 0.3));
+}
+
+/* ── Review Text ── */
+
+.rc-review-text {
+  font-size: 1.35rem;
+  color: #355e72;
+  line-height: 1.7;
+  font-style: italic;
+  margin: 0 0 1.25rem;
+  display: -webkit-box;
+  -webkit-line-clamp: 4;
+  line-clamp: 4;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+}
+
+/* ── User Name ── */
+
+.rc-user-name {
+  font-size: 1.4rem;
+  font-weight: 700;
+  color: #0b3558;
+  margin: 0 0 0.35rem;
+}
+
+/* ── Meta (service & staff) ── */
+
+.rc-meta {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 0.4rem;
+  flex-wrap: wrap;
+}
+
+.rc-service,
+.rc-staff {
+  font-size: 1.15rem;
+  color: #6b8a99;
+}
+
+.rc-dot {
+  color: #bfd6df;
+  font-size: 1rem;
+}
+
+/* ── Navigation ── */
+
+.rc-nav {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 1.5rem;
+  margin-top: 2.5rem;
+}
+
+.rc-arrow {
+  width: 42px;
+  height: 42px;
+  border-radius: 50%;
+  border: 2px solid #bfd6df;
+  background: #fff;
+  color: #0b3558;
+  font-size: 2.2rem;
+  line-height: 1;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: all 0.25s ease;
+  padding: 0;
+}
+
+.rc-arrow:hover {
+  background: #0b3558;
+  border-color: #0b3558;
+  color: #fff;
+  box-shadow: 0 4px 16px rgba(11, 53, 88, 0.25);
+}
+
+/* ── Dots ── */
+
+.rc-dots {
+  display: flex;
+  gap: 0.5rem;
+  align-items: center;
+}
+
+.rc-dot-btn {
+  width: 10px;
+  height: 10px;
+  border-radius: 50%;
+  border: none;
+  background: #d5dfe4;
+  cursor: pointer;
+  padding: 0;
+  transition: all 0.25s ease;
+}
+
+.rc-dot-btn--active {
+  background: #0b3558;
+  width: 28px;
+  border-radius: 100px;
+}
+
+/* ── Responsive ── */
+
+@media (max-width: 768px) {
+  .rc-side {
+    display: none;
+  }
+
+  .rc-center {
+    flex: 1;
+    max-width: 400px;
+  }
+
+  .rc-heading {
+    font-size: 2.4rem;
+  }
+
+  .rc-subheading {
+    font-size: 1.3rem;
+    margin-bottom: 2.5rem;
+  }
+}
+
+@media (max-width: 480px) {
+  .rc-card {
+    padding: 2rem 1.5rem;
+  }
+
+  .rc-heading {
+    font-size: 2rem;
+  }
+}

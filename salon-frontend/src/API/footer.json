@@ -1,0 +1,32 @@
+[
+    {
+        "id":1,
+        "service":"Haircut & Styling"
+    },
+     {
+        "id":2,
+        "service":"Facial & Skin Care"
+    },
+     {
+        "id":3,
+        "service":"Hair Coloring"
+
+    },
+     {
+        "id":4,
+        "service":"Beard Grooming"
+
+    },
+     {
+        "id":5,
+        "service":"Waxing Services"
+
+    },
+     {
+        "id":6,
+        "service":"Bridal Makeup"
+
+    }
+    
+    
+]

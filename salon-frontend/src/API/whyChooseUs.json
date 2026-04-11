@@ -1,0 +1,30 @@
+[
+    {
+        "id":1,
+        "title":"Easy Online Booking",
+        "body":"Book salon appointments 24/7 from your mobile or desktop. Instant confirmation for all beauty services."
+    },
+    {
+        "id":2,
+        "title":"Real-Time Slot Availability",
+        "body":"See available time slots in real-time and choose what fits your schedule best for hair and beauty services."
+    },
+    {
+        "id":3,
+        "title":"Secure Online Payments",
+        "body":"Pay securely online with multiple payment options and focus on your beauty experience."
+    },
+    {
+        "id":4,
+        "title":"Verified Customer Reviews",
+        "body":"Make informed decisions with authentic reviews and ratings from other customers."
+    },
+    {
+        "id":5,
+        "title":"Wide Service Selection",
+        "body":"From basic haircuts to bridal packages, find all beauty services in one platform."
+    }
+]
+
+
+

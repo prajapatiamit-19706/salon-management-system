@@ -1,0 +1,392 @@
+@import "tailwindcss";
+@import "tailwindcss";
+
+ @theme {
+  /* =========================
+     BACKGROUND COLORS
+     ========================= */
+  --color-bg-main: #FFFFFF;        /* page background */
+  --color-bg-soft: #DCEFF5;        /* light blue sections */
+  --color-bg-panel: #CFE6EE;       /* cards / slides */
+  --color-bg-dark: #0B3558;        /* deep navy blocks */
+
+  /* =========================
+     PRIMARY / BRAND
+     ========================= */
+  --color-primary: #0B3558;        /* headings, buttons */
+  --color-primary-soft: #1F4E79;   /* hover / accents */
+
+  /* =========================
+     TEXT COLORS
+     ========================= */
+  --color-text-heading: #0B3558;   /* dark navy text */
+  --color-text-body: #355E72;      /* muted blue-gray */
+  --color-text-muted: #6B8A99;     /* captions */
+  --color-text-invert: #FFFFFF;    /* text on dark bg */
+
+  /* =========================
+     BORDERS & DIVIDERS
+     ========================= */
+  --color-border-soft: #BFD6DF;
+  --color-border-strong: #0B3558;
+
+  /* =========================
+     OVERLAYS
+     ========================= */
+  --color-overlay-dark: rgba(11, 53, 88, 0.45);
+    
+   /* =========================
+     SHADOWS
+     ========================= */
+
+  /* Light card shadow (default) */
+  --shadow-soft:
+    0 4px 12px rgba(11, 53, 88, 0.08);
+
+  /* Elevated card / hover */
+  --shadow-medium:
+    0 8px 24px rgba(11, 53, 88, 0.12);
+
+  /* Strong focus / active */
+  --shadow-strong:
+    0 16px 40px rgba(11, 53, 88, 0.18);
+
+  /* Inner panel (subtle inset) */
+  --shadow-inset:
+    inset 0 1px 2px rgba(255, 255, 255, 0.6),
+    inset 0 -1px 2px rgba(11, 53, 88, 0.08);
+
+  --shadow-custom: 0 4px 12px rgba(16, 24, 40, 0.15);
+
+   --perspective-distant: 1200px;
+ 
+}
+
+/* for category animation */
+@layer utilities {
+  @keyframes fastPulse {
+    0%, 100% {
+      color: rgb(55, 47, 52);
+    }
+    50% {
+      color: rgb(205, 48, 132);
+    }
+  }
+
+  .animate-fast-pulse {
+    animation: fastPulse 1s linear infinite;
+  }
+}
+
+
+/* for toast message */
+/* Enter animation */
+@keyframes toastEnter {
+  0% {
+    opacity: 0;
+    transform: translateY(-20px) scale(0.9);
+  }
+  100% {
+    opacity: 1;
+    transform: translateY(0) scale(1);
+  }
+}
+
+/* Exit animation */
+@keyframes toastLeave {
+  0% {
+    opacity: 1;
+    transform: translateY(0) scale(1);
+  }
+  100% {
+    opacity: 0;
+    transform: translateY(-10px) scale(0.95);
+  }
+}
+
+.toast-enter {
+  animation: toastEnter 0.35s ease-out forwards;
+}
+
+.toast-leave {
+  animation: toastLeave 0.25s ease-in forwards;
+}
+
+/* Check bounce animation */
+@keyframes checkPop {
+  0% { transform: scale(0.6); }
+  60% { transform: scale(1.2); }
+  100% { transform: scale(1); }
+}
+
+.animate-check {
+  animation: checkPop 0.4s ease-out;
+}
+
+/* booking summery */
+@keyframes pricePulse {
+  0% { transform: scale(1); }
+  50% { transform: scale(1.08); }
+  100% { transform: scale(1); }
+}
+
+.animate-price {
+  animation: pricePulse 0.4s ease-in-out;
+}
+
+/* Hide scrollbar but allow scroll */
+.no-scrollbar::-webkit-scrollbar {
+  display: none;
+}
+
+.no-scrollbar {
+  -ms-overflow-style: none;  /* IE & Edge */
+  scrollbar-width: none;     /* Firefox */
+  scroll-behavior: smooth;
+  scroll-snap-type: x mandatory;
+}
+.no-scrollbar > div {
+  scroll-snap-align: start;
+}
+
+/* basics */
+*{
+    /* margin: 0;
+    padding: 0; */
+    box-sizing: border-box;
+}
+
+ body{
+    background-color: var(--white);
+ }
+ html{
+  font-size: 62.5%;
+  scroll-behavior: smooth;
+ }
+
+ a{
+    font-size: 1.8rem;
+    color: var(--white);
+    cursor: pointer;
+    &:hover{
+        color: var(--accent-dark)
+    }
+ }
+
+.container{
+    max-width: 120rem;
+    margin: auto;
+}
+
+
+/***** Section-navBar *****/ 
+/* --- Base Styles (Assumed, adjust as needed) --- */
+header {
+  /* position: absolute; */
+  /* background-color: #030712; Example background color */
+  /* position: fixed; */
+  width: 100%;
+  z-index: 1000;
+  padding: 1rem 2rem;
+}
+
+.navbar-container {
+  display: grid;
+  grid-template-columns: 0.5 1fr; /* Logo and Nav/Hamburger on opposite sides */
+  align-items: center;
+}
+
+/* --- Desktop Nav (menu-web) --- */
+nav ul {
+  display: flex;
+  justify-content: flex-end;
+  gap: 2rem;
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+
+.menu-web a {
+  color: white;
+  text-decoration: none;
+  font-weight: 500;
+  transition: color 0.3s ease;
+}
+
+.menu-web a:hover, .menu-web .active-link {
+  color: var(--accent-light, #f0e68c); /* Use a light accent color */
+}
+
+/* Hide hamburger button by default on desktop */
+.ham-menu {
+  display: none;
+ /* grid-column: 2;  Ensure it's on the right side */
+  /* text-align: end; */
+}
+
+/* --- Media Query for Mobile (max-width: 768px) --- */
+@media screen and (max-width: 768px) {
+  /* Hide the regular menu on mobile */
+  .menu-web {
+    display: none;
+  }
+
+  /* Show the hamburger menu button */
+  .ham-menu {
+    display: inline-block;
+  }
+
+  /* Styling for the hamburger button and icon */
+  .ham-menu button {
+    background: none;
+    border: none;
+    cursor: pointer;
+    padding: 0;
+  }
+
+  .menu {
+    width: 2.5rem; /* Reduced size */
+    height: 2.5rem;
+    color: var(--accent-light, #f0e68c);
+  }
+
+  /* --- Mobile Menu SLIDE-IN STYLES --- */
+  .menu-mobile {
+    /* Fixed positioning to overlay content */
+    position: fixed;
+    top: 0; /* Changed from 10rem to 0 to cover the whole height */
+    right: 0;
+    
+    /* Set dimensions for the sliding panel */
+    width: 30%; /* More consistent than 50% */
+    max-width: 350px;
+    height: 70%; /* Full viewport height */
+    
+     background-color: white;
+    box-shadow: var(--shadow-xl, -5px 0 15px rgba(0, 0, 0, 0.2));
+    z-index: 900; /* Must be below the header, but above content */
+    
+    /* THE KEY: Define the transition property */
+    transition: transform 0.4s ease-out; 
+  }
+  
+  /* Initial state: push menu off-screen to the right */
+  .menu-mobile.inactive {
+    transform: translateX(100%);
+    pointer-events: none; /* Disable interaction when hidden */
+  }
+
+  /* Active state: slide menu into view */
+  .menu-mobile.active {
+    transform: translateX(0);
+    pointer-events: auto; /* Enable interaction when visible */
+  }
+
+  /* Styling for mobile menu list */
+  .menu-mobile ul {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-end; /* Align links to the left */
+    padding:0 3rem;
+    list-style: none;
+    gap:3rem;
+    margin-top: 5rem; /* Space below the header */
+  }
+  
+  /* Styling for mobile links */
+  .menu-mobile a {
+    color: black;
+    text-decoration: none;
+    font-size: 1.5rem;
+    font-weight: 600;
+    display: block;
+    width: 100%;
+    padding: 0.5rem 0;
+    border-bottom: 1px solid rgba(15, 23, 34, 0.1); /* Subtle separator */
+    transition: background-color 0.3s ease;
+  }
+
+  .menu-mobile a:hover, .menu-mobile .active-link-mobile {
+      background-color: rgba(15, 23, 34, 0.05);
+      border-radius: 4px;
+      padding-left: 10px;
+  }
+}
+/***** End Section-navBar *****/
+
+
+
+@keyframes scroll {
+  0% {
+    transform: translateX(0);
+  }
+  100% {
+    transform: translateX(-50%);
+  }
+}
+
+.animate-scroll {
+  animation: scroll 15s linear infinite;
+}
+
+
+/* category dropdown */
+.custom-dropdown option {
+    /* Set the background to white */
+    background-color: white !important; 
+    
+    /* Set the text color to a dark color */
+    color: black !important;
+    padding: 4px;
+}
+
+.scrollbar-hide::-webkit-scrollbar {
+  display: none;
+}
+
+.scrollbar-hide {
+  -ms-overflow-style: none;
+  scrollbar-width: none;
+}
+
+/* category service animation */
+@keyframes fadeUp {
+  from {
+    opacity: 0;
+    transform: translateY(12px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.animate-fade-up {
+  animation: fadeUp 0.7s ease-out both;
+}
+
+
+/* staff */
+
+ul li:nth-child(3) img {
+  object-position: top !important;
+}
+ul li:nth-child(4) img {
+  object-position: top !important;
+}
+
+/* page animation for staff */
+@keyframes pageFade {
+  from {
+    opacity: 0;
+    transform: translateY(12px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.page-animate {
+  animation: pageFade 0.35s ease-out both;
+}
