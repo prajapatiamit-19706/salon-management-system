@@ -1,6 +1,6 @@
 💇‍♂️ Salon Management System
 
-A full-stack AI-powered Salon Management System built using the MERN stack. This application allows users to book salon services online, while providing admins with a powerful dashboard to manage appointments, staff, services, and payments.
+A full-stack Salon Management System built using the MERN stack. This application allows users to book salon services online, while providing admins with a powerful dashboard to manage appointments, staff, services, and payments.
 
 ---
 
