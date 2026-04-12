@@ -8,3 +8,8 @@ export const createBillApi = async (data, token) => {
     });
     return response.data;
 }
+
+export const getBillApi = async () => {
+    const res = await api.get("/bill/payments");
+    return res.data.bill;
+}

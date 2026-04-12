@@ -12,7 +12,6 @@ import {
 } from "lucide-react";
 import { StatCard } from "../components/StatCard";
 import { StatusBadge } from "../components/StatusBadge";
-import { minutesToTime } from "../data/mockData";
 import { useQuery } from "@tanstack/react-query";
 import { fetchAdminDashboardApi } from "../../API/dashboard.api";
 import { LoadingSpinner } from "../../components/LoadingSpinner";
@@ -32,6 +31,14 @@ export const Dashboard = () => {
     if (!dateStr) return "—";
     const d = new Date(dateStr);
     return d.toLocaleDateString("en-IN", { day: "2-digit", month: "short", year: "numeric" });
+  };
+
+  const minutesToTime = (minutes) => {
+    const hours = Math.floor(minutes / 60);
+    const mins = minutes % 60;
+    const ampm = hours >= 12 ? "PM" : "AM";
+    const h = hours % 12 || 12;
+    return `${h}:${mins === 0 ? "00" : mins} ${ampm}`;
   };
 
   if (isPending) return <LoadingSpinner />

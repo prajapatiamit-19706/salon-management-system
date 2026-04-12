@@ -1,0 +1,183 @@
+[
+  {
+    "id": "srv-001",
+    "name": "Shaving (Clean/Traditional)",
+    "category": "beard",
+    "description": "Traditional clean shave with razor and hot towel treatment.",
+    "gender": "male",
+    "duration": "30 mins",
+    "priceFrom": "₹99",
+    "tag": "Traditional Shaving",
+    "rating": "4.1"
+  },
+  {
+    "id": "srv-002",
+    "name": "Women's Haircut & Styling",
+    "category": "hair",
+    "description": "Professional haircut with blow-dry and basic styling included.",
+    "gender": "female",
+    "duration": "40 mins",
+    "priceFrom": "₹299",
+    "tag": "women haircut",
+    "rating": "4.6"
+  },
+  {
+    "id": "srv-003",
+    "name": "Beard Grooming & Styling",
+    "category": "beard",
+    "description": "Expert beard trimming, shaping, and conditioning services.",
+    "gender": "male",
+    "duration": "30 mins",
+    "priceFrom": "₹199",
+    "tag": "beard grooming",
+    "rating": "4.7"
+  },
+  {
+    "id": "srv-004",
+    "name": "Haircut & Styling",
+    "category": "hair",
+    "description": "Classic cut, blow-dry and finishing tailored to your face shape.",
+    "gender": "male",
+    "duration": "45 mins",
+    "priceFrom": "₹799",
+    "tag": "Popular",
+    "rating": "4.3"
+  },
+  {
+    "id": "srv-005",
+    "name": "Deep Nourish Hair Spa",
+    "category": "hair",
+    "description": "Intense nourishment for dry or chemically treated hair.",
+    "gender": "female",
+    "duration": "60 mins",
+    "priceFrom": "₹1,299",
+    "tag": "Best for damaged hair",
+    "rating": "4.5"
+  },
+  {
+    "id": "srv-006",
+    "name": "Head & Shoulder Spa",
+    "category": "spa",
+    "description": "Relaxing head, neck & shoulder massage with aromatherapy oils.",
+    "gender": "male/female",
+    "duration": "40 mins",
+    "priceFrom": "₹999",
+    "rating": "3.9"
+  },
+  {
+    "id": "srv-007",
+    "name": "Global Hair Color",
+    "category": "hair",
+    "description": "Full-length hair coloring with professional shades.",
+    "gender": "male/female",
+    "duration": "120 mins",
+    "priceFrom": "₹2,499",
+    "tag": "Trending",
+    "rating": "4.0"
+  },
+  {
+    "id": "srv-008",
+    "name": "Express Clean-Up",
+    "category": "Skin & Facial",
+    "description": "Quick clean-up for instant freshness and glow.",
+    "gender": "male/female",
+    "duration": "30 mins",
+    "priceFrom": "₹699",
+    "rating": "4.1"
+  },
+  {
+    "id": "srv-009",
+    "name": "Radiance Facial",
+    "category": "Skin & Facial",
+    "description": "Brightening facial for dull and tired skin.",
+    "gender": "male/female",
+    "duration": "60 mins",
+    "priceFrom": "₹1,499",
+    "tag": "Glow boost",
+    "rating": "4.2"
+  },
+  {
+    "id": "srv-010",
+    "name": "Bridal Makeup Trial",
+    "category": "makeup",
+    "description": "Trial session to finalize your bridal look with expert artist.",
+    "gender": "female",
+    "duration": "90 mins",
+    "priceFrom": "₹2,999",
+    "tag": "Bridal",
+    "rating": "3.9"
+  },
+  {
+    "id": "srv-011",
+    "name": "Party Makeup",
+    "category": "makeup",
+    "description": "Camera-ready makeup for parties, shoots and events.",
+    "gender": "male/female",
+    "duration": "60 mins",
+    "priceFrom": "₹1,999",
+    "rating": "4.0"
+  },
+  {
+    "id": "srv-012",
+    "name": "Manicure & Pedicure",
+    "category": "Nail & Foot Care",
+    "description": "Classic and spa manicure pedicure services with nail art",
+    "gender": "female",
+    "duration": "",
+    "priceFrom": "",
+    "rating": "4.7"
+  },
+  {
+    "id": "srv-013",
+    "name": "Glow Combo: Facial + Hair Spa",
+    "category": "Package",
+    "description": "Facial plus hair spa combo for full head-to-toe refresh.",
+    "gender": "male/female",
+    "duration": "120 mins",
+    "priceFrom": "₹2,799",
+    "tag": "Combo offer",
+    "rating": "4.6"
+  },
+  {
+    "id": "srv-014",
+    "name": "style Combo: hair cut + beard grooming & style + facial",
+    "category": "Package",
+    "description": "Hair cut and beard grooming plus facial combo.",
+    "gender": "male",
+    "duration": "120 mins",
+    "priceFrom": "₹799",
+    "tag": "Combo offer",
+    "rating": "4.6"
+  },
+  {
+    "id": "srv-015",
+    "name": "Eyebrow Shaping & Threading",
+    "category": "eyebrow",
+    "description": "Precise eyebrow shaping, threading, and grooming services",
+    "gender": "male/female",
+    "duration": "30 mins",
+    "priceFrom": "299",
+    "rating": "4.4"
+  },
+  {
+    "id": "srv-016",
+    "name": "Waxing Services",
+    "category": "waxing",
+    "description": "Full body waxing services for smooth, hair-free skin. Includes legs, arms, face, and Brazilian waxing with premium wax.",
+    "gender": "male/female",
+    "duration": " ",
+    "priceFrom": "",
+    "tag": "wax",
+    "rating": "4.6"
+  },
+  {
+    "id": "srv-017",
+    "name": "Waxing & Threading",
+    "category": "waxing",
+    "description": "Full body waxing, facial threading, and hair removal services",
+    "gender": "male/female",
+    "duration": "",
+    "priceFrom": "",
+    "rating": "3.8"
+  }
+]

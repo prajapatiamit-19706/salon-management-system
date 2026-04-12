@@ -15,11 +15,11 @@ export const Settings = () => {
   const [activeTab, setActiveTab] = useState("general");
 
   const [general, setGeneral] = useState({
-    salonName: "GlowUp Salon",
-    email: user?.email || "admin@glowup.com",
+    salonName: "Glow&Grace Salon",
+    email: user?.email || "admin@Glow&Grace.com",
     phone: "+91 98765 43210",
     address: "123, MG Road, Bengaluru, Karnataka 560001",
-    website: "www.glowupsalon.com",
+    website: "www.Glow&Gracesalon.com",
     openTime: "09:00",
     closeTime: "21:00",
     workingDays: ["Mon", "Tue", "Wed", "Thu", "Fri", "Sat"],

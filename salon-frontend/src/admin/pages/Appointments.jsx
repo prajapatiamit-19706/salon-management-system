@@ -3,7 +3,6 @@ import { Eye, XCircle, CheckCircle2, CalendarCheck } from "lucide-react";
 import { DataTable } from "../components/DataTable";
 import { StatusBadge } from "../components/StatusBadge";
 import { Modal, ConfirmDialog } from "../components/Modal";
-import { appointments as allAppointments, minutesToTime } from "../data/mockData";
 import toast from "react-hot-toast";
 import { fetchAllAppointmentsApi } from "../../API/dashboard.api";
 import { useMutation, useQuery, useQueryClient } from "@tanstack/react-query";
@@ -23,6 +22,14 @@ export const Appointments = () => {
     if (!dateStr) return "—";
     const d = new Date(dateStr);
     return d.toLocaleDateString("en-IN", { day: "2-digit", month: "short", year: "numeric" });
+  };
+
+  const minutesToTime = (minutes) => {
+    const hours = Math.floor(minutes / 60);
+    const mins = minutes % 60;
+    const ampm = hours >= 12 ? "PM" : "AM";
+    const h = hours % 12 || 12;
+    return `${h}:${mins === 0 ? "00" : mins} ${ampm}`;
   };
 
   const { data, isPending, isError, error, refetch } = useQuery({

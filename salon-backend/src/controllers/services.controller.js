@@ -123,8 +123,6 @@ export const deleteService = async (req, res) => {
 
 export const updateService = async (req, res) => {
   try {
-    console.log("req.body →", req.body); // ← add this temporarily
-    console.log("req.params.id →", req.params.id); // ← check id exists
 
     const {
       displayOrder,
@@ -138,7 +136,7 @@ export const updateService = async (req, res) => {
       isActive,
     } = req.body;
 
-    // ✅ serviceCode is intentionally excluded — it is auto-generated on create and never changes
+    //  serviceCode is intentionally excluded — it is auto-generated on create and never changes
     const service = await Service.findByIdAndUpdate(
       req.params.id,
       {

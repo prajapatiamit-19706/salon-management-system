@@ -1,5 +1,3 @@
-// import { button } from "framer-motion/client";
-import { IoGiftSharp } from "react-icons/io5";
 import srv from "../../API/ServiceGrid.json";
 import {
   Sparkles,

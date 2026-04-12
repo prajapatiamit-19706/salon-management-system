@@ -24,7 +24,7 @@ const menuItems = [
   { label: "Staff", icon: Users, path: "/admin/staff" },
   { label: "Customers", icon: UserCircle, path: "/admin/customers" },
   { label: "Payments", icon: CreditCard, path: "/admin/payments" },
-  { label: "Gallery", icon: Image, path: "/admin/gallery" },
+  // { label: "Gallery", icon: Image, path: "/admin/gallery" },
   { label: "Settings", icon: Settings, path: "/admin/settings" },
 ];
 
@@ -66,7 +66,7 @@ export const AdminSidebar = ({ mobileOpen = false, onMobileClose }) => {
             {!collapsed && (
               <div className="overflow-hidden">
                 <h1 className="text-[15px] font-bold text-text-invert tracking-wide leading-none">
-                  GlowUp
+                  Glow & Grace
                 </h1>
                 <p className="text-[10px] text-bg-soft font-medium tracking-widest uppercase mt-0.5">
                   Admin Panel

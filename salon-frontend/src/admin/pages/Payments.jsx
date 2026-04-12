@@ -2,23 +2,80 @@ import { useState } from "react";
 import { IndianRupee, Download } from "lucide-react";
 import { DataTable } from "../components/DataTable";
 import { StatusBadge } from "../components/StatusBadge";
-import { payments as allPayments } from "../data/mockData";
+import { useQuery } from "@tanstack/react-query";
+import { getBillApi } from "../../API/bill.api";
+import jsPDF from "jspdf";
+import autoTable from "jspdf-autotable";
+// import { payments as allPayments } from "../data/mockData";
 
 export const Payments = () => {
   const [filter, setFilter] = useState("all");
 
+
+  const {
+    data: allPayments = [],
+    isPending,
+    isError,
+    error,
+    refetch
+  } = useQuery({
+    queryKey: ["payments"],
+    queryFn: getBillApi,
+    staleTime: 5 * 60 * 1000, // cache for 5 minutes   
+  })
+
+
   const filtered = filter === "all" ? allPayments : allPayments.filter((p) => p.status === filter);
 
-  const totalRevenue = allPayments.filter((p) => p.status === "completed").reduce((acc, p) => acc + p.amount, 0);
+  const totalRevenue = allPayments.filter((p) => p.status === "paid").reduce((acc, p) => acc + p.amount, 0);
   const pendingAmount = allPayments.filter((p) => p.status === "pending").reduce((acc, p) => acc + p.amount, 0);
   const refundedAmount = allPayments.filter((p) => p.status === "refunded").reduce((acc, p) => acc + p.amount, 0);
 
   const filterTabs = [
     { label: "All", value: "all", count: allPayments.length },
-    { label: "Completed", value: "completed", count: allPayments.filter((p) => p.status === "completed").length },
+    { label: "Completed", value: "completed", count: allPayments.filter((p) => p.status === "paid").length },
     { label: "Pending", value: "pending", count: allPayments.filter((p) => p.status === "pending").length },
     { label: "Refunded", value: "refunded", count: allPayments.filter((p) => p.status === "refunded").length },
   ];
+
+  const handleExport = () => {
+    if (!filtered || filtered.length === 0) {
+      alert("No data to export");
+      return;
+    }
+
+    const doc = new jsPDF();
+
+    doc.setFontSize(16);
+    doc.text("Payments Report", 14, 15);
+    doc.setFontSize(10);
+    doc.text(`Filter: ${filter.toUpperCase()} | Date: ${new Date().toLocaleDateString()}`, 14, 22);
+
+    const tableColumn = ["Customer", "Service", "Amount", "Method", "Status", "Date"];
+    const tableRows = [];
+
+    filtered.forEach(row => {
+      const rowData = [
+        row.customer || "-",
+        row.service || "-",
+        `Rs. ${row.amount || 0}`,
+        row.method || "-",
+        row.status || "-",
+        row.date || "-"
+      ];
+      tableRows.push(rowData);
+    });
+
+    autoTable(doc, {
+      head: [tableColumn],
+      body: tableRows,
+      startY: 28,
+      theme: 'grid',
+      headStyles: { fillColor: [11, 53, 88] }
+    });
+
+    doc.save(`payments_report_${filter}_${new Date().toISOString().split('T')[0]}.pdf`);
+  };
 
   const columns = [
     {
@@ -78,7 +135,10 @@ export const Payments = () => {
           <h1 className="text-xl font-bold text-text-heading tracking-tight">Payments</h1>
           <p className="text-[13px] text-text-body mt-0.5">Track all payment transactions</p>
         </div>
-        <button className="flex items-center gap-2 px-4 py-2.5 rounded-xl bg-bg-main border border-border-soft text-[13px] font-medium text-text-body hover:bg-bg-soft transition-colors shadow-soft">
+        <button
+          onClick={handleExport}
+          className="flex items-center gap-2 px-4 py-2.5 rounded-xl bg-bg-main border border-border-soft text-[13px] font-medium text-text-body hover:bg-bg-soft transition-colors shadow-soft"
+        >
           <Download size={15} />
           Export Report
         </button>

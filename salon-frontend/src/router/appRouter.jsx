@@ -151,7 +151,7 @@ const router = createBrowserRouter([
 
             { path: "payments", element: <Payments /> },
 
-            { path: "gallery", element: <AdminGallery /> },
+            // { path: "gallery", element: <AdminGallery /> },
 
             { path: "settings", element: <Settings /> },
         ],

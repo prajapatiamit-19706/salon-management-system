@@ -42,3 +42,51 @@ export const createBill = async (req, res) => {
         });
     }
 };
+
+// get all bill
+
+export const getAllBill = async (req, res) => {
+    try {
+
+        const bills = await Bill.find()
+            .populate("customerId", "name email")
+            .populate("staffId", "name")
+            .populate({
+                path: "appointmentId",
+                populate: {
+                    path: "serviceId",
+                    select: "name"
+                }
+            })
+            .sort({ createdAt: -1 });
+
+        if (!bills) {
+            return res.status(400).json({
+                success: false,
+                message: "failed to fetch bill"
+            })
+        }
+
+        const formattedBills = bills.map(bill => ({
+            id: bill._id,
+            customer: bill.customerId?.name || "Unknown",
+            service: bill.appointmentId?.serviceId?.name || "Unknown",
+            amount: bill.totalAmount,
+            method: bill.paymentMode,
+            status: bill.paymentStatus,
+            date: new Date(bill.billDate).toLocaleDateString("en-IN", { day: "2-digit", month: "short", year: "numeric" })
+        }));
+
+        res.status(200).json({
+            success: true,
+            bill: formattedBills
+        })
+
+    } catch (error) {
+        console.error("fetch bill err:", error);
+        res.status(500).json({
+            success: false,
+            message: "failed to fetch"
+        });
+    }
+}
