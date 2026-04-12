@@ -174,44 +174,48 @@ export const ForgotPassword = () => {
                 Secure your account
               </h2>
 
-              <div className="relative">
+              <div className="mb-4">
                 <label className="block text-2xl pl-1 font-medium text-heading mb-1 mt-5">
                   New Password
                 </label>
-                <input
-                  type={showPassword ? "text" : "password"}
-                  required
-                  name="newPassword"
-                  className="w-full rounded-xl border border-border/80 bg-bg px-4 py-3 text-2xl text-heading outline-none focus:border-primary focus:ring-2 focus:ring-primary-soft mb-4 mt-2"
-                  placeholder="••••••••"
-                />
-                <button
-                  type="button"
-                  onClick={() => setShowPassword(!showPassword)}
-                  className="absolute right-4 top-[50px] text-text text-2xl cursor-pointer hover:scale-110"
-                >
-                  {showPassword ? <HiEyeOff /> : <HiEye />}
-                </button>
+                <div className="relative mt-2">
+                  <input
+                    type={showPassword ? "password" : "text"}
+                    required
+                    name="newPassword"
+                    className="w-full rounded-xl border border-border/80 bg-bg px-4 py-3 pr-12 text-2xl text-heading outline-none focus:border-primary focus:ring-2 focus:ring-primary-soft"
+                    placeholder="••••••••"
+                  />
+                  <button
+                    type="button"
+                    onClick={() => setShowPassword(!showPassword)}
+                    className="absolute right-4 top-1/2 -translate-y-1/2 text-text text-2xl cursor-pointer hover:scale-110"
+                  >
+                    {showPassword ? <HiEyeOff /> : <HiEye />}
+                  </button>
+                </div>
               </div>
 
-              <div className="relative">
+              <div className="mb-2">
                 <label className="block text-2xl pl-1 font-medium text-heading mb-1">
                   Confirm Password
                 </label>
-                <input
-                  type={showConfirmPassword ? "text" : "password"}
-                  required
-                  name="confirmPassword"
-                  className="w-full rounded-xl border border-border/80 bg-bg px-4 py-3 text-2xl text-heading outline-none focus:border-primary focus:ring-2 focus:ring-primary-soft mb-2 mt-2"
-                  placeholder="••••••••"
-                />
-                <button
-                  type="button"
-                  onClick={() => setShowConfirmPassword(!showConfirmPassword)}
-                  className="absolute right-4 top-[50px] text-text text-2xl cursor-pointer hover:scale-110"
-                >
-                  {showConfirmPassword ? <HiEyeOff /> : <HiEye />}
-                </button>
+                <div className="relative mt-2">
+                  <input
+                    type={showConfirmPassword ? "password" : "text"}
+                    required
+                    name="confirmPassword"
+                    className="w-full rounded-xl border border-border/80 bg-bg px-4 py-3 pr-12 text-2xl text-heading outline-none focus:border-primary focus:ring-2 focus:ring-primary-soft"
+                    placeholder="••••••••"
+                  />
+                  <button
+                    type="button"
+                    onClick={() => setShowConfirmPassword(!showConfirmPassword)}
+                    className="absolute right-4 top-1/2 -translate-y-1/2 text-text text-2xl cursor-pointer hover:scale-110"
+                  >
+                    {showConfirmPassword ? <HiEyeOff /> : <HiEye />}
+                  </button>
+                </div>
               </div>
 
               <button

@@ -4,6 +4,7 @@ import { HiEye, HiEyeOff } from "react-icons/hi";
 import { NavLink, useNavigate } from "react-router-dom";
 import { sendRegisterOtpApi, verifyRegisterOtpApi } from "../../API/authApi";
 import { AuthContext } from "../../context/authContext";
+import toast from "react-hot-toast";
 
 export const Register = () => {
 
@@ -30,7 +31,7 @@ export const Register = () => {
       setEmail(variables.email); // store only email
       setErrors({});
       formRef.current.reset();    //reset form 
-      alert("otp send successful!");
+      toast.success("otp sent successful!");
 
       setStep("otp");
       setTimer(60);
@@ -161,7 +162,7 @@ export const Register = () => {
                   required
                   name="name"
                   className="w-full rounded-xl border border-border/80 bg-bg px-4 py-3 text-2xl text-heading outline-none focus:border-primary focus:ring-2 focus:ring-primary-soft"
-                  placeholder="Riya"
+                  placeholder="Enter your name"
                 />
                 {errors.Name && (
                   <p className="text-red-500 text-xl mt-1">{errors.Name}</p>
@@ -240,20 +241,22 @@ export const Register = () => {
                   <label className="block text-2xl font-medium text-heading mb-1">
                     Password
                   </label>
-                  <input
-                    type={showPassword ? "password" : "text"}
-                    required
-                    name="password"
-                    className="w-full rounded-xl border border-border/80 bg-bg px-4 py-3 text-2xl text-heading outline-none focus:border-primary focus:ring-2 focus:ring-primary-soft"
-                    placeholder="••••••••"
-                  />
-                  <button
-                    type="button"
-                    onClick={() => setShowPassword(!showPassword)}
-                    className="absolute right-4 top-[61%]  text-text text-2xl cursor-pointer hover:scale-110 "
-                  >
-                    {showPassword ? <HiEyeOff /> : <HiEye />}
-                  </button>
+                  <div className="relative">
+                    <input
+                      type={showPassword ? "password" : "text"}
+                      required
+                      name="password"
+                      className="w-full rounded-xl border border-border/80 bg-bg px-4 py-3 pr-12 text-2xl text-heading outline-none focus:border-primary focus:ring-2 focus:ring-primary-soft"
+                      placeholder="••••••••"
+                    />
+                    <button
+                      type="button"
+                      onClick={() => setShowPassword(!showPassword)}
+                      className="absolute right-4 top-1/2 -translate-y-1/2 text-text text-2xl cursor-pointer hover:scale-110"
+                    >
+                      {showPassword ? <HiEyeOff /> : <HiEye />}
+                    </button>
+                  </div>
                   {errors.password && (
                     <p className="text-red-500 text-xl mt-1">{errors.password}</p>
                   )}
@@ -263,20 +266,22 @@ export const Register = () => {
                   <label className="block text-2xl font-medium text-heading mb-1">
                     Confirm Password
                   </label>
-                  <input
-                    type={showConfirmPassword ? "password" : "text"}
-                    required
-                    name="confirmPassword"
-                    className="w-full rounded-xl border border-border/80 bg-bg px-4 py-3 text-2xl text-heading outline-none focus:border-primary focus:ring-2 focus:ring-primary-soft"
-                    placeholder="••••••••"
-                  />
-                  <button
-                    type="button"
-                    onClick={() => setShowConfirmPassword(!showConfirmPassword)}
-                    className="absolute right-4 top-[75%]  text-text text-2xl cursor-pointer hover:scale-110 "
-                  >
-                    {showConfirmPassword ? <HiEyeOff /> : <HiEye />}
-                  </button>
+                  <div className="relative">
+                    <input
+                      type={showConfirmPassword ? "password" : "text"}
+                      required
+                      name="confirmPassword"
+                      className="w-full rounded-xl border border-border/80 bg-bg px-4 py-3 pr-12 text-2xl text-heading outline-none focus:border-primary focus:ring-2 focus:ring-primary-soft"
+                      placeholder="••••••••"
+                    />
+                    <button
+                      type="button"
+                      onClick={() => setShowConfirmPassword(!showConfirmPassword)}
+                      className="absolute right-4 top-1/2 -translate-y-1/2 text-text text-2xl cursor-pointer hover:scale-110"
+                    >
+                      {showConfirmPassword ? <HiEyeOff /> : <HiEye />}
+                    </button>
+                  </div>
                   {errors.confirmPassword && (
                     <p className="text-red-500 text-xl mt-1">
                       {errors.confirmPassword}

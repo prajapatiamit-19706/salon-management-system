@@ -123,20 +123,22 @@ export const Login = () => {
                 <label className="block text-2xl pl-1 font-medium text-heading mb-1">
                   Password
                 </label>
-                <input
-                  type={showLoginPassword ? "password" : "text"}
-                  required
-                  name="password"
-                  className="w-full rounded-xl border border-border/80 bg-bg px-4 py-3 text-2xl text-heading outline-none focus:border-primary focus:ring-2 focus:ring-primary-soft"
-                  placeholder="••••••••"
-                />
-                <button
-                  type="button"
-                  onClick={() => setShowLoginPassword(!showLoginPassword)}
-                  className="absolute right-4 top-1/2  text-text text-2xl cursor-pointer hover:scale-110 "
-                >
-                  {showLoginPassword ? <HiEyeOff /> : <HiEye />}
-                </button>
+                <div className="relative">
+                  <input
+                    type={showLoginPassword ? "password" : "text"}
+                    required
+                    name="password"
+                    className="w-full rounded-xl border border-border/80 bg-bg px-4 py-3 pr-12 text-2xl text-heading outline-none focus:border-primary focus:ring-2 focus:ring-primary-soft"
+                    placeholder="••••••••"
+                  />
+                  <button
+                    type="button"
+                    onClick={() => setShowLoginPassword(!showLoginPassword)}
+                    className="absolute right-4 top-1/2 -translate-y-1/2 text-text text-2xl cursor-pointer hover:scale-110"
+                  >
+                    {showLoginPassword ? <HiEyeOff /> : <HiEye />}
+                  </button>
+                </div>
                 {errors.password && (
                   <p className="text-red-500 text-xl mt-1">{errors.password}</p>
                 )}
