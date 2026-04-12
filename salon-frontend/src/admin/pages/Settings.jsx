@@ -15,7 +15,7 @@ export const Settings = () => {
   const [activeTab, setActiveTab] = useState("general");
 
   const [general, setGeneral] = useState({
-    salonName: "Glow&Grace Salon",
+    salonName: "Glow & Grace",
     email: user?.email || "admin@Glow&Grace.com",
     phone: "+91 98765 43210",
     address: "123, MG Road, Bengaluru, Karnataka 560001",
