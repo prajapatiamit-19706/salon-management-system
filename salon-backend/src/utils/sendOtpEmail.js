@@ -32,4 +32,13 @@ export const sendOtpEmail = async (email, otp) => {
     console.error("❌ NODEMAILER ERROR:", error);
     throw new Error(`Failed to send email: ${error.message}`);
   }
+
+  transporter.verify((error, success) => {
+    if (error) {
+      console.log("SMTP ERROR:", error);
+    } else {
+      console.log("SMTP READY ✅");
+    }
+  });
 };
+
