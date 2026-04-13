@@ -8,10 +8,12 @@ export const sendOtpEmail = async (email, otp) => {
     throw new Error("Email server configuration is missing in production environment.");
   }
 
+
   const transporter = nodemailer.createTransport({
     host: "smtp.gmail.com",
-    port: 465,
-    secure: true,
+    port: 587,
+    secure: false,
+    family: 4, // 🔥 FORCE IPv4 (VERY IMPORTANT)
     auth: {
       user: process.env.EMAIL_USER,
       pass: process.env.EMAIL_PASS
