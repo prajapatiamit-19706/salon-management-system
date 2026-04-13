@@ -8,7 +8,6 @@ const generateOtp = () =>
   Math.floor(100000 + Math.random() * 900000).toString();
 
 
-// ================= REGISTER =================
 
 //  Send Register OTP
 
@@ -90,8 +89,6 @@ export const verifyRegisterOtp = async (req, res) => {
   }
 };
 
-
-// ================= LOGIN =================
 
 //  Send Login OTP
 export const sendLoginOtp = async (req, res) => {
