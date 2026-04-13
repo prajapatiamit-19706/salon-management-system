@@ -2,18 +2,14 @@ import nodemailer from "nodemailer";
 import { otpEmailTemplate } from "./otpEmailTemplate.js";
 
 export const sendOtpEmail = async (email, otp) => {
-  // Check if environment variables are loaded (Critical for production/Render)
+  // Check if environment variables are loaded
   if (!process.env.EMAIL_USER || !process.env.EMAIL_PASS) {
     console.error("❌ CRITICAL: EMAIL_USER or EMAIL_PASS environment variable is missing!");
     throw new Error("Email server configuration is missing in production environment.");
   }
 
-
   const transporter = nodemailer.createTransport({
-    host: "smtp.gmail.com",
-    port: 587,
-    secure: false,
-    family: 4, // 🔥 FORCE IPv4 (VERY IMPORTANT)
+    service: "gmail",
     auth: {
       user: process.env.EMAIL_USER,
       pass: process.env.EMAIL_PASS
@@ -34,13 +30,4 @@ export const sendOtpEmail = async (email, otp) => {
     console.error("❌ NODEMAILER ERROR:", error);
     throw new Error(`Failed to send email: ${error.message}`);
   }
-
-  transporter.verify((error, success) => {
-    if (error) {
-      console.log("SMTP ERROR:", error);
-    } else {
-      console.log("SMTP READY ✅");
-    }
-  });
 };
-

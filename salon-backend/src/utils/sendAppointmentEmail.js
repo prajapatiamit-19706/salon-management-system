@@ -12,10 +12,16 @@ export const sendAppointmentEmail = async (email, appointmentDetails) => {
 
   console.log(`\n\n[DEV MODE] 🔴 Appointment confirmation sent to ${email} for ${appointmentDetails.serviceName}\n\n`);
 
-  await transporter.sendMail({
-    from: `"Glow & Grace" <${process.env.EMAIL_USER}>`,
-    to: email,
-    subject: "✨ Your Appointment is Confirmed",
-    html: appointmentEmailTemplate(appointmentDetails),
-  });
+  try {
+    await transporter.sendMail({
+      from: `"Glow & Grace" <${process.env.EMAIL_USER}>`,
+      to: email,
+      subject: "✨ Your Appointment is Confirmed",
+      html: appointmentEmailTemplate(appointmentDetails),
+    });
+    console.log(`✅ Appointment email successfully sent to ${email}`);
+  } catch (error) {
+    console.error("❌ NODEMAILER ERROR:", error);
+    throw new Error(`Failed to send email: ${error.message}`);
+  }
 };

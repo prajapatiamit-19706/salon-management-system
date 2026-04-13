@@ -14,10 +14,16 @@ export const sendFeedbackEmail = async (email, feedbackDetails) => {
     `\n\n[DEV MODE] 🔴 Feedback request sent to ${email} for appointment ${feedbackDetails.appointmentId}\n\n`
   );
 
-  await transporter.sendMail({
-    from: `"Glow & Grace" <${process.env.EMAIL_USER}>`,
-    to: email,
-    subject: "⭐ How was your visit? Share your feedback!",
-    html: feedbackEmailTemplate(feedbackDetails),
-  });
+  try {
+    await transporter.sendMail({
+      from: `"Glow & Grace" <${process.env.EMAIL_USER}>`,
+      to: email,
+      subject: "⭐ How was your visit? Share your feedback!",
+      html: feedbackEmailTemplate(feedbackDetails),
+    });
+    console.log(`✅ Feedback email successfully sent to ${email}`);
+  } catch (error) {
+    console.error("❌ NODEMAILER ERROR:", error);
+    throw new Error(`Failed to send email: ${error.message}`);
+  }
 };
