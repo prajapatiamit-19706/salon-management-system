@@ -15,8 +15,9 @@ export const Gallery = () => {
     { value: "beard", label: "Beard" },
     { value: "spa", label: "Spa" },
     { value: "eyebrow", label: "Eyebrow" },
-    { value: "nail", label: "Nail" },
-    { value: "facial", label: "Facial" },
+    { value: "makeup", label: "MakeUp" },
+    { value: "nails", label: "Nail" },
+    { value: "skin", label: "Facial" },
     { value: "waxing", label: "Waxing" },
 
   ]
