@@ -126,8 +126,8 @@ export const Appointments = () => {
     {
       header: "Staff",
       key: "staff",
-      render: (row) => <span className="text-[12px] text-text-body">{row.staffId.name}</span>,
-      accessor: (row) => row.staffId.name,
+      render: (row) => <span className="text-[12px] text-text-body">{row.staffId?.name || "Unknown staff"}</span>,
+      accessor: (row) => row.staffId?.name || "Unknown staff",
     },
     {
       header: "Date",

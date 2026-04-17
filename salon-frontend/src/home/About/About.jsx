@@ -80,7 +80,7 @@ export const About = () => {
 
             <div className="rounded-3xl overflow-hidden shadow-medium">
               <img
-                src="/salon.jpg"
+                src="/images/galleryp1.jpg"
                 alt="Our Salon"
                 className="w-full h-full object-cover"
                 loading="lazy"

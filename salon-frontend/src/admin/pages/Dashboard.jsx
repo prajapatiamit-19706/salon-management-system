@@ -98,28 +98,92 @@ export const Dashboard = () => {
             </div>
           </div>
 
-          {/* Bar chart */}
-          <div className="flex items-end justify-between gap-2 h-48">
-            {realMonthlyRevenue.map((m, i) => {
-              const height = (m.revenue / maxRevenue) * 100;
-              return (
-                <div key={i} className="flex-1 flex flex-col items-center gap-2 group">
-                  <div className="relative w-full flex justify-center">
+          {/* Line chart */}
+          <div className="relative h-48 w-full mt-8 mb-6">
+            <svg viewBox="0 0 1000 200" preserveAspectRatio="none" className="absolute inset-0 w-full h-full overflow-visible z-0">
+              <defs>
+                <linearGradient id="lineColor" x1="0" y1="0" x2="0" y2="1">
+                  <stop offset="0%" stopColor="currentColor" stopOpacity="1" className="text-primary" />
+                  <stop offset="100%" stopColor="currentColor" stopOpacity="1" className="text-primary-soft" />
+                </linearGradient>
+                <linearGradient id="areaGradient" x1="0" y1="0" x2="0" y2="1">
+                  <stop offset="0%" stopColor="currentColor" stopOpacity="0.25" className="text-primary" />
+                  <stop offset="100%" stopColor="currentColor" stopOpacity="0" className="text-primary" />
+                </linearGradient>
+              </defs>
+
+              {/* Area */}
+              <path
+                d={`M0,200 ${realMonthlyRevenue.map((m, i) => {
+                  const x = (i / (Math.max(realMonthlyRevenue.length - 1, 1))) * 1000;
+                  const y = 200 - (m.revenue / maxRevenue) * 160 - 20;
+                  return `L${x},${y}`;
+                }).join(" ")} L1000,200 Z`}
+                fill="url(#areaGradient)"
+              />
+
+              {/* Path */}
+              <path
+                d={`${realMonthlyRevenue.map((m, i) => {
+                  const x = (i / (Math.max(realMonthlyRevenue.length - 1, 1))) * 1000;
+                  const y = 200 - (m.revenue / maxRevenue) * 160 - 20;
+                  return `${i === 0 ? 'M' : 'L'}${x},${y}`;
+                }).join(" ")}`}
+                fill="none"
+                stroke="url(#lineColor)"
+                strokeWidth="4"
+                strokeLinecap="round"
+                strokeLinejoin="round"
+              />
+
+              {/* Points */}
+              {realMonthlyRevenue.map((m, i) => {
+                const x = (i / (Math.max(realMonthlyRevenue.length - 1, 1))) * 1000;
+                const y = 200 - (m.revenue / maxRevenue) * 160 - 20;
+                return (
+                 <circle
+                    key={i}
+                    cx={x}
+                    cy={y}
+                    r="4"
+                    className="fill-bg-main stroke-primary pointer-events-none"
+                    strokeWidth="2.5"
+                  />
+                );
+              })}
+            </svg>
+
+            {/* Hover zones and X-axis labels */}
+            <div className="absolute inset-0 z-10 pointer-events-none">
+              {realMonthlyRevenue.map((m, i) => {
+                const xPercentage = (i / (Math.max(realMonthlyRevenue.length - 1, 1))) * 100;
+                const yPercentage = ((200 - (m.revenue / maxRevenue) * 160 - 20) / 200) * 100;
+                return (
+                  <div key={i} 
+                       className="absolute top-0 bottom-0 flex flex-col items-center group pointer-events-auto cursor-pointer"
+                       style={{ left: `${xPercentage}%`, width: '40px', transform: 'translateX(-50%)' }}>
+                    
                     {/* Tooltip */}
-                    <div className="absolute -top-8 opacity-0 group-hover:opacity-100 transition-opacity duration-200 pointer-events-none">
-                      <span className="bg-bg-dark text-text-invert text-[10px] px-2 py-1 rounded-md font-medium whitespace-nowrap">
+                    <div className="absolute opacity-0 group-hover:opacity-100 transition-all duration-200 pointer-events-none z-20 flex justify-center -translate-y-2 group-hover:translate-y-0"
+                         style={{ top: `calc(${yPercentage}% - 35px)` }}>
+                      <span className="bg-bg-dark text-text-invert text-[11px] px-2.5 py-1.5 rounded-lg font-medium whitespace-nowrap shadow-lg">
                         ₹{(m.revenue / 1000).toFixed(1)}K
                       </span>
                     </div>
-                    <div
-                      className="w-full max-w-8 rounded-t-lg bg-linear-to-t from-primary to-primary-soft group-hover:from-primary-soft group-hover:to-primary transition-all duration-300 cursor-pointer"
-                      style={{ height: `${height}%`, minHeight: "8px" }}
-                    />
+                    
+                    {/* Vertical guideline */}
+                    <div className="absolute top-0 bottom-0 w-px bg-primary/30 opacity-0 group-hover:opacity-100 transition-opacity pointer-events-none" />
+                    
+                    {/* Hover point emphasis */}
+                    <div className="absolute opacity-0 group-hover:opacity-100 transition-opacity duration-200 pointer-events-none w-3 h-3 rounded-full bg-primary/20"
+                         style={{ top: `calc(${yPercentage}% - 6px)` }} />
+                    
+                    {/* X-axis label */}
+                    <span className="absolute -bottom-6 text-[10px] text-text-muted font-medium whitespace-nowrap">{m.month}</span>
                   </div>
-                  <span className="text-[10px] text-text-muted font-medium">{m.month}</span>
-                </div>
-              );
-            })}
+                );
+              })}
+            </div>
           </div>
         </div>
 
@@ -144,10 +208,10 @@ export const Dashboard = () => {
                     }
                   `}
                 >
-                  {s.name.charAt(0)}
+                  {s?.name?.charAt(0) || "?"}
                 </div>
                 <div className="flex-1 min-w-0">
-                  <p className="text-[12px] font-semibold text-text-heading truncate">{s.name}</p>
+                  <p className="text-[12px] font-semibold text-text-heading truncate">{s?.name || "Unknown"}</p>
                   <div className="flex items-center gap-2 mt-0.5">
                     <span className="text-[10px] text-text-muted">{s.appointments} appts</span>
                     <span className="text-[10px] text-border-soft">·</span>
@@ -193,13 +257,13 @@ export const Dashboard = () => {
                   <td className="px-6 py-3.5">
                     <div className="flex items-center gap-2.5">
                       <div className="w-7 h-7 rounded-lg bg-bg-panel flex items-center justify-center text-[10px] font-bold text-primary">
-                        {apt.userId.name.charAt(0)}
+                        {apt.userId?.name?.charAt(0) || "?"}
                       </div>
-                      <span className="text-[13px] font-medium text-text-heading">{apt.userId.name}</span>
+                      <span className="text-[13px] font-medium text-text-heading">{apt.userId?.name || "Unknown User"}</span>
                     </div>
                   </td>
-                  <td className="px-6 py-3.5 text-[13px] text-text-body">{apt.serviceId.name}</td>
-                  <td className="px-6 py-3.5 text-[13px] text-text-body">{apt.staffId.name}</td>
+                  <td className="px-6 py-3.5 text-[13px] text-text-body">{apt.serviceId?.name || "Unknown Service"}</td>
+                  <td className="px-6 py-3.5 text-[13px] text-text-body">{apt.staffId?.name || "Unknown Staff"}</td>
                   <td className="px-6 py-3.5">
                     <div>
                       <span className="text-[12px] text-text-heading font-medium">{formatDate(apt.date)}</span>

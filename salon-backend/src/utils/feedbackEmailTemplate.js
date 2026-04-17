@@ -6,6 +6,12 @@ export const feedbackEmailTemplate = ({
   time,
   feedbackLink,
 }) => {
+
+  const formatDate = (dateStr) => {
+    if (!dateStr) return "—";
+    const d = new Date(dateStr);
+    return d.toLocaleDateString("en-IN", { day: "2-digit", month: "short", year: "numeric" });
+  };
   return `
 <!DOCTYPE html>
 <html lang="en">
@@ -91,7 +97,7 @@ export const feedbackEmailTemplate = ({
                       Date & Time
                     </p>
                     <p style="margin: 0 0 16px; color: #0B3558; font-size: 16px; font-weight: bold;">
-                      📅 ${date} at ${time}
+                      📅 ${formatDate(date)} at ${time}
                     </p>
 
                     <p style="margin: 0 0 8px; color: #6B8A99; font-size: 11px; font-weight: 700; letter-spacing: 2px; text-transform: uppercase;">

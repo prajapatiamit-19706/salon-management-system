@@ -46,7 +46,7 @@ export const SelectService = ({
             >
               <h3 className="font-semibold">{service.name}</h3>
 
-              <span className="text-md">{service.duration} mins</span>
+              {/* <span className="text-md">{service.duration} mins</span> */}
 
               <p className="font-semibold italic">
                 From ₹{service.priceFrom}

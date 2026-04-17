@@ -11,6 +11,12 @@ import autoTable from "jspdf-autotable";
 export const Payments = () => {
   const [filter, setFilter] = useState("all");
 
+  const formatDate = (dateStr) => {
+    if (!dateStr) return "-";
+    const d = new Date(dateStr);
+    return d.toLocaleDateString("en-IN", { day: "2-digit", month: "short", year: "numeric" });
+  };
+
 
   const {
     data: allPayments = [],
@@ -31,6 +37,17 @@ export const Payments = () => {
   const pendingAmount = allPayments.filter((p) => p.status === "pending").reduce((acc, p) => acc + p.amount, 0);
   const refundedAmount = allPayments.filter((p) => p.status === "refunded").reduce((acc, p) => acc + p.amount, 0);
 
+  const currentMonth = new Date().getMonth();
+  const currentYear = new Date().getFullYear();
+
+  const monthlyRevenue = allPayments
+    .filter((p) => p.status === "paid" && new Date(p.date).getMonth() === currentMonth && new Date(p.date).getFullYear() === currentYear)
+    .reduce((acc, p) => acc + p.amount, 0);
+
+  const yearlyRevenue = allPayments
+    .filter((p) => p.status === "paid" && new Date(p.date).getFullYear() === currentYear)
+    .reduce((acc, p) => acc + p.amount, 0);
+
   const filterTabs = [
     { label: "All", value: "all", count: allPayments.length },
     { label: "Completed", value: "completed", count: allPayments.filter((p) => p.status === "paid").length },
@@ -49,7 +66,11 @@ export const Payments = () => {
     doc.setFontSize(16);
     doc.text("Payments Report", 14, 15);
     doc.setFontSize(10);
-    doc.text(`Filter: ${filter.toUpperCase()} | Date: ${new Date().toLocaleDateString()}`, 14, 22);
+    doc.text(`Filter: ${filter.toUpperCase()} | Date: ${formatDate(new Date())}`, 14, 22);
+
+    doc.text(`Total Revenue: Rs. ${totalRevenue.toLocaleString()}`, 14, 28);
+    doc.text(`Monthly Revenue: Rs. ${monthlyRevenue.toLocaleString()}`, 70, 28);
+    doc.text(`Yearly Revenue: Rs. ${yearlyRevenue.toLocaleString()}`, 130, 28);
 
     const tableColumn = ["Customer", "Service", "Amount", "Method", "Status", "Date"];
     const tableRows = [];
@@ -61,7 +82,7 @@ export const Payments = () => {
         `Rs. ${row.amount || 0}`,
         row.method || "-",
         row.status || "-",
-        row.date || "-"
+        formatDate(row.date)
       ];
       tableRows.push(rowData);
     });
@@ -69,7 +90,7 @@ export const Payments = () => {
     autoTable(doc, {
       head: [tableColumn],
       body: tableRows,
-      startY: 28,
+      startY: 34,
       theme: 'grid',
       headStyles: { fillColor: [11, 53, 88] }
     });
@@ -124,7 +145,7 @@ export const Payments = () => {
     {
       header: "Date",
       key: "date",
-      render: (row) => <span className="text-[12px] text-text-body">{row.date}</span>,
+      render: (row) => <span className="text-[12px] text-text-body">{formatDate(row.date)}</span>,
     },
   ];
 
