@@ -44,7 +44,8 @@ export const sendRegisterOtp = async (req, res) => {
 
     await user.save();
 
-    await sendOtpEmail(email, otp);
+    // TEMPORARILY DISABLED FOR CHATBOT BUILD
+    // await sendOtpEmail(email, otp);
 
     res.json({ message: "OTP sent successfully" });
 
@@ -113,7 +114,8 @@ export const sendLoginOtp = async (req, res) => {
 
     await user.save();
 
-    await sendOtpEmail(email, otp);
+    // TEMPORARILY DISABLED FOR CHATBOT BUILD
+    // await sendOtpEmail(email, otp);
 
     res.json({ message: "OTP sent to email" });
 
@@ -137,19 +139,20 @@ export const verifyLoginOtp = async (req, res) => {
       });
     }
 
-    // 🔴 Wrong OTP
-    if (user.otp !== otp) {
-      return res.status(400).json({
-        message: "Invalid OTP"
-      });
-    }
+    // TEMPORARILY DISABLED FOR CHATBOT BUILD
+    // // 🔴 Wrong OTP
+    // if (user.otp !== otp) {
+    //   return res.status(400).json({
+    //     message: "Invalid OTP"
+    //   });
+    // }
 
-    // 🔴 Expired OTP
-    if (user.otpExpiry < Date.now()) {
-      return res.status(400).json({
-        message: "OTP expired"
-      });
-    }
+    // // 🔴 Expired OTP
+    // if (user.otpExpiry < Date.now()) {
+    //   return res.status(400).json({
+    //     message: "OTP expired"
+    //   });
+    // }
 
     user.isVerified = true;
     user.otp = undefined;
@@ -200,7 +203,8 @@ export const forgotPassword = async (req, res) => {
 
     await user.save();
 
-    await sendOtpEmail(email, otp);
+    // TEMPORARILY DISABLED FOR CHATBOT BUILD
+    // await sendOtpEmail(email, otp);
 
     res.json({ message: "OTP sent successfully" });
   } catch (error) {
@@ -221,19 +225,20 @@ export const resetPassword = async (req, res) => {
       });
     }
 
-    // 🔴 Wrong OTP
-    if (user.otp !== otp) {
-      return res.status(400).json({
-        message: "Invalid OTP"
-      });
-    }
+    // TEMPORARILY DISABLED FOR CHATBOT BUILD
+    // // 🔴 Wrong OTP
+    // if (user.otp !== otp) {
+    //   return res.status(400).json({
+    //     message: "Invalid OTP"
+    //   });
+    // }
 
-    // 🔴 Expired OTP
-    if (user.otpExpiry < Date.now()) {
-      return res.status(400).json({
-        message: "OTP expired"
-      });
-    }
+    // // 🔴 Expired OTP
+    // if (user.otpExpiry < Date.now()) {
+    //   return res.status(400).json({
+    //     message: "OTP expired"
+    //   });
+    // }
 
     const hashedPassword = await bcrypt.hash(newPassword, 10);
 
