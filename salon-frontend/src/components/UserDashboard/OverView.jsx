@@ -1,4 +1,5 @@
 import { useState, useEffect } from "react";
+import { NavLink } from "react-router-dom";
 
 function useCountUp(target, duration = 1200) {
   const [count, setCount] = useState(0);
@@ -86,11 +87,17 @@ export const Overview = ({
                 )}
               </div>
             </div>
+            <div>
+              {
+                user?.role === "admin" ? <NavLink to={"/admin"}> <span className="text-white underline hover:text-blue-400"> Admin Panel </span></NavLink> : null
+              }
+            </div>
 
             <div className="shrink-0 w-20 h-20 lg:w-24 lg:h-24 rounded-full bg-bg-soft/10 border border-text-invert/10 flex items-center justify-center text-4xl lg:text-5xl shadow-inset">
               {user?.gender === "Female" ? "👩" : "👤"}
             </div>
           </div>
+
         </div>
 
         {/* ── Stats Grid ── */}
