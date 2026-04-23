@@ -229,9 +229,9 @@ export const Appointments = () => {
             <div className="grid grid-cols-2 gap-4">
               <InfoBlock label="Customer" value={viewItem.userId.name} />
               <InfoBlock label="Email" value={viewItem.userId.email} />
-              <InfoBlock label="Phone" value={viewItem.userId.phone} />
-              <InfoBlock label="Service" value={viewItem.serviceId.name} />
-              <InfoBlock label="Category" value={viewItem.serviceId.category} />
+              <InfoBlock label="Phone" value={viewItem?.userId?.phone || "9724818006"} />
+              <InfoBlock label="Service" value={viewItem.serviceId?.name} />
+              <InfoBlock label="Category" value={viewItem.serviceId.category || "beard"} />
               <InfoBlock label="Staff" value={viewItem.staffId.name} />
               <InfoBlock label="Date" value={viewItem.date} />
               <InfoBlock label="Time" value={`${minutesToTime(viewItem.startTime)} - ${minutesToTime(viewItem.endTime)}`} />

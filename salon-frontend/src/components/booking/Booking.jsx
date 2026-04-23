@@ -136,6 +136,11 @@ export const Booking = () => {
     const formattedHour = hours % 12 || 12;
     return `${formattedHour}:${mins === 0 ? "00" : mins} ${ampm}`;
   };
+  const formatDate = (dateStr) => {
+    if (!dateStr) return "—";
+    const d = new Date(dateStr);
+    return d.toLocaleDateString("en-IN", { day: "2-digit", month: "short", year: "numeric" });
+  };
 
   const handleServiceClick = (service) => {
     setSelectedService(service);
@@ -170,7 +175,7 @@ export const Booking = () => {
 
       // 1. Create Order
       const orderRes = await createRazorpayOrder(totalPrice);
-      
+
       const options = {
         key: import.meta.env.VITE_RAZORPAY_KEY_ID || "rzp_test_Sa46S6KUfLMAku",
         amount: orderRes.order.amount,
@@ -179,38 +184,38 @@ export const Booking = () => {
         description: `Booking for ${selectedService.name}`,
         order_id: orderRes.order.id,
         handler: async function (response) {
-            try {
-                // 2. Verify Payment
-                await verifyRazorpayPayment({
-                    razorpay_order_id: response.razorpay_order_id,
-                    razorpay_payment_id: response.razorpay_payment_id,
-                    razorpay_signature: response.razorpay_signature
-                });
+          try {
+            // 2. Verify Payment
+            await verifyRazorpayPayment({
+              razorpay_order_id: response.razorpay_order_id,
+              razorpay_payment_id: response.razorpay_payment_id,
+              razorpay_signature: response.razorpay_signature
+            });
 
-                // 3. Book Appointment and Create Bill internally
-                mutation.mutate({
-                  data: {
-                    serviceId: selectedService._id,
-                    staffId: selectedStaff._id,
-                    date: selectedDate,
-                    startTime: selectedTime,
-                  },
-                  token,
-                  paymentMode: "Online"
-                });
+            // 3. Book Appointment and Create Bill internally
+            mutation.mutate({
+              data: {
+                serviceId: selectedService._id,
+                staffId: selectedStaff._id,
+                date: selectedDate,
+                startTime: selectedTime,
+              },
+              token,
+              paymentMode: "Online"
+            });
 
-            } catch (err) {
-                toast.error("Payment verification failed");
-                setIsProcessingPayment(false);
-            }
+          } catch (err) {
+            toast.error("Payment verification failed");
+            setIsProcessingPayment(false);
+          }
         },
         theme: { color: "#16a34a" }
       };
 
       const rzp1 = new window.Razorpay(options);
-      rzp1.on('payment.failed', function (response){
-          toast.error("Payment failed. Please try again.");
-          setIsProcessingPayment(false);
+      rzp1.on('payment.failed', function (response) {
+        toast.error("Payment failed. Please try again.");
+        setIsProcessingPayment(false);
       });
       rzp1.open();
 
@@ -374,7 +379,7 @@ export const Booking = () => {
             <div className="space-y-4 text-gray-600">
               <p className="text-2xl"><strong>Service:</strong> {selectedService?.name}</p>
               <p className="text-2xl"><strong>Staff:</strong> {selectedStaff?.name}</p>
-              <p className="text-2xl"><strong>Date:</strong> {selectedDate}</p>
+              <p className="text-2xl"><strong>Date:</strong> {formatDate(selectedDate)}</p>
               <p className="text-2xl"><strong>Time:</strong> {formatTime(selectedTime)}</p>
               <p className="text-2xl border-t pt-4 mt-4 text-gray-800"><strong>Total Amount:</strong> ₹{totalPrice}</p>
             </div>

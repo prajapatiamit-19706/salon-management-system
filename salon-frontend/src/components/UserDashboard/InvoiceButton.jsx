@@ -10,7 +10,7 @@ const mockAppointment = {
   duration: "60 min",
   price: 299,          // always a number
   tax: 0,              // set 0 if no tax
-  salon: "Serenity Wellness Studio",
+  salon: "Glow & Grace",
   salonAddress: "12, MG Road, Bengaluru - 560001",
   salonPhone: "+91 98765 43210",
   customerName: "Arjun Mehta",
