@@ -17,22 +17,29 @@ export const ChatInterface = () => {
         try {
             const res = await fetch('https://salon-management-system-j1tm.onrender.com/message', {
                 method: 'POST',
-                headers: { 'Content-Type': 'application/json' },
+                headers: {
+                    'Content-Type': 'application/json',
+                    'Accept': 'application/json'
+                },
                 body: JSON.stringify({ message: input, userId: 'guest-123' }),
             });
 
+            // Check if the response is actually OK (status 200-299)
+            if (!res.ok) {
+                const errorText = await res.text();
+                console.error("Server Error:", errorText);
+                throw new Error(`Server responded with ${res.status}`);
+            }
+
             const data = await res.json();
 
-            // DEBUG: This will show you exactly what the agent is sending in your console
-            console.log("Agent Data:", data);
+            // Logic to extract the message regardless of the key name
+            const botReply = data.reply || data.output || data.message || (typeof data === 'string' ? data : "No reply content");
 
-            // Fallback chain: Check for 'reply', then 'output', then 'message'
-            const agentText = data.reply || data.output || data.message || "I'm sorry, I couldn't process that.";
-
-            setMessages(prev => [...prev, { role: 'assistant', content: agentText }]);
-        } catch (err) {
-            console.error("Connection Error:", err);
-            setMessages(prev => [...prev, { role: 'assistant', content: "Connection lost. Please check if the backend is running." }]);
+            setMessages(prev => [...prev, { role: 'assistant', content: botReply }]);
+        } catch (error) {
+            console.error("Fetch error details:", error);
+            setMessages(prev => [...prev, { role: 'assistant', content: "Agent is sleeping. Try again in a moment." }]);
         } finally {
             setIsLoading(false);
         }
