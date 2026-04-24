@@ -4,6 +4,7 @@ import { Header } from "../components/Navbar"
 import PageMotion from "../components/pageMotion";
 import { useEffect, useState } from "react";
 import { AnimatePresence } from "framer-motion";
+import { ChatInterface } from "../UI/ChatInterface";
 
 
 function ScrollToTopOnNavigate() {
@@ -15,26 +16,26 @@ function ScrollToTopOnNavigate() {
 }
 
 
-export const MainLayout=()=>{
+export const MainLayout = () => {
 
-   const location = useLocation();     
+  const location = useLocation();
 
-       return (
+  return (
     <>
       <ScrollToTopOnNavigate />
 
       {/* Your header/navbar component */}
-      <Header/>
+      <Header />
 
       {/* AnimatePresence watches route changes.
           key={location.pathname} ensures AnimatePresence knows when page changed. */}
       {/* <AnimatePresence mode="wait"> */}
-        {/* PageMotion will animate enter/exit for each route */}
-        <PageMotion key={location.pathname} className="min-h-screen">
-          <Outlet />
-        </PageMotion>
+      {/* PageMotion will animate enter/exit for each route */}
+      <PageMotion key={location.pathname} className="min-h-screen">
+        <Outlet />
+      </PageMotion>
       {/* </AnimatePresence> */}
-
+      <ChatInterface />
       {/* Your footer component */}
       <Footer />
     </>

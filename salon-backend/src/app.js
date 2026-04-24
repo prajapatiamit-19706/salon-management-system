@@ -14,12 +14,19 @@ import reviewRoute from "./routes/review.route.js"
 import uploadRoute from "./routes/upload.route.js"
 import galleryRoute from "./routes/gallery.route.js"
 import paymentRoute from "./routes/payment.route.js"
+import chatRoute from "./routes/chat.route.js"
 
 const app = express();
 
 // some middlewares
 app.use(express.json())
-app.use(cors());
+// backend/server.js
+
+app.use(cors({
+    origin: ['http://localhost:5173', 'https://salon-management-system-iota.vercel.app'], // Add your dev and prod URLs
+    methods: ['GET', 'POST'],
+    credentials: true
+}));
 app.use(express.urlencoded({ extended: true }))
 
 //imp
@@ -37,5 +44,6 @@ app.use("/reviews", reviewRoute);
 app.use("/upload", uploadRoute);
 app.use("/gallery", galleryRoute);
 app.use("/payment", paymentRoute);
+app.use("/message", chatRoute)
 
 export default app;
