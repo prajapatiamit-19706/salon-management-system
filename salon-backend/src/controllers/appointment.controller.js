@@ -163,6 +163,8 @@ export const getAvailableSlots = async (req, res) => {
     const currentMinutes =
       nowLocal.getHours() * 60 + nowLocal.getMinutes();
 
+    console.log("[DEBUG getAvailableSlots] req.query.date:", date, " backend today:", today, " currentMinutes:", currentMinutes);
+
     // Generate dynamic slots
     for (
       let time = salonOpen;

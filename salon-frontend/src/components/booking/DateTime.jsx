@@ -53,7 +53,7 @@ export const DateTime = ({
       date.setDate(today.getDate() + i);
 
       days.push({
-        full: date.toISOString().split("T")[0],
+        full: date.toLocaleDateString("en-CA"), // YYYY-MM-DD in local time
         day: date.toLocaleDateString("en-IN", { weekday: "short" }),
         dateNumber: date.getDate(),
         isToday: i === 0
