@@ -26,9 +26,18 @@ export const VideoSection = () => {
     });
   };
 
+  const closeVideo = useCallback(() => {
+    if (window.history.state?.popup === "video") {
+      window.history.back();
+    } else {
+      setActiveReel(null);
+    }
+  }, []);
+
   useEffect(() => {
     if (activeReel) {
       document.body.style.overflow = "hidden";
+      window.history.pushState({ popup: "video" }, "");
     } else {
       document.body.style.overflow = "auto";
     }
@@ -39,10 +48,20 @@ export const VideoSection = () => {
   }, [activeReel]);
 
   useEffect(() => {
-    const handleEsc = (e) => e.key === "Escape" && setActiveReel(null);
+    const handlePopState = () => {
+      if (activeReel) {
+        setActiveReel(null);
+      }
+    };
+    window.addEventListener("popstate", handlePopState);
+    return () => window.removeEventListener("popstate", handlePopState);
+  }, [activeReel]);
+
+  useEffect(() => {
+    const handleEsc = (e) => e.key === "Escape" && activeReel && closeVideo();
     window.addEventListener("keydown", handleEsc);
     return () => window.removeEventListener("keydown", handleEsc);
-  }, []);
+  }, [activeReel, closeVideo]);
 
 
 
@@ -113,11 +132,11 @@ export const VideoSection = () => {
       {activeReel && (
         <div
           className="fixed inset-0 z-50 bg-black/90 flex items-center justify-center"
-          onClick={() => setActiveReel(null)} // bg click closes
+          onClick={closeVideo} // bg click closes
         >
           {/* Close button */}
           <button
-            onClick={() => setActiveReel(null)}
+            onClick={closeVideo}
             className="absolute top-2 right-2
                    z-50
                    bg-white text-black
