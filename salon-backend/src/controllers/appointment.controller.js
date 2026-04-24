@@ -149,13 +149,19 @@ export const getAvailableSlots = async (req, res) => {
 
     let slots = [];
 
-    // Get today's date
-    const today = new Date().toISOString().split("T")[0];
+    // Get true local time for the salon (IST)
+    const nowLocalStr = new Date().toLocaleString("en-US", { timeZone: "Asia/Kolkata" });
+    const nowLocal = new Date(nowLocalStr);
 
-    // Current time in minutes
-    const now = new Date();
+    // Get today's date in local time
+    const year = nowLocal.getFullYear();
+    const month = String(nowLocal.getMonth() + 1).padStart(2, "0");
+    const day = String(nowLocal.getDate()).padStart(2, "0");
+    const today = `${year}-${month}-${day}`;
+
+    // Current time in minutes in local time
     const currentMinutes =
-      now.getHours() * 60 + now.getMinutes();
+      nowLocal.getHours() * 60 + nowLocal.getMinutes();
 
     // Generate dynamic slots
     for (
