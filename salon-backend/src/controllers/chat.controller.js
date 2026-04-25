@@ -16,9 +16,16 @@ export const handleChat = async (req, res) => {
             { timeout: 30000 } // 30 second timeout for AI processing
         );
 
+        console.log("n8n response:", n8nResponse.data);
+        console.log("n8n full response:", JSON.stringify(n8nResponse.data));
+        console.log("n8n status:", n8nResponse.status);
+
+
         // 3. Robust Data Extraction
-        // This checks for 'output', then 'reply', then 'message' in case n8n structure changes
-        const botReply = n8nResponse.data?.output ||
+        // This checks for 'message', 'output', then 'reply' in case n8n structure changes
+        const botReply = n8nResponse.data?.message ||
+            n8nResponse.data?.[0]?.message ||
+            n8nResponse.data?.output ||
             n8nResponse.data?.reply ||
             n8nResponse.data?.[0]?.output ||
             "I'm sorry, I couldn't process that right now.";
