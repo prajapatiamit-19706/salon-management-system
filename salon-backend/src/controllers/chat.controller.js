@@ -52,7 +52,7 @@ export const handleChat = async (req, res) => {
 
         // 3. Initialize Gemini model
         const model = genAI.getGenerativeModel({
-            model: "gemini-1.5-flash",
+            model: "gemini-2.0-flash",  // ✅ correct model name
             systemInstruction: SALON_SYSTEM_PROMPT,
         });
 
