@@ -31,15 +31,27 @@ export const ChatInterface = () => {
             const apiUrl = import.meta.env.VITE_API_URL || 'http://localhost:3000';
             const res = await fetch(`${apiUrl}/message`, {
                 method: 'POST',
-                headers: { 'Content-Type': 'application/json', Accept: 'application/json' },
-                body: JSON.stringify({ message: msg, userId: 'guest-123' }),
+                headers: {
+                    'Content-Type': 'application/json',
+                    Accept: 'application/json'
+                },
+                body: JSON.stringify({
+                    message: msg,
+                    userId: 'guest-123'  // ← this should ideally be logged-in user's ID
+                }),
             });
+
             if (!res.ok) throw new Error(`Server responded with ${res.status}`);
+
             const data = await res.json();
-            const botReply = data.reply || data.output || data.text || data.message || (typeof data === 'string' ? data : 'No reply content');
+            const botReply = data.reply || data.output || data.message;
+
             setMessages(prev => [...prev, { role: 'assistant', content: botReply }]);
         } catch {
-            setMessages(prev => [...prev, { role: 'assistant', content: 'Agent is sleeping. Try again in a moment.' }]);
+            setMessages(prev => [...prev, {
+                role: 'assistant',
+                content: 'Agent is sleeping. Try again in a moment.'
+            }]);
         } finally {
             setIsLoading(false);
         }

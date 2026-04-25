@@ -45,5 +45,6 @@ app.use("/upload", uploadRoute);
 app.use("/gallery", galleryRoute);
 app.use("/payment", paymentRoute);
 app.use("/message", chatRoute)
+app.get('/api/health', (req, res) => res.status(200).json({ status: 'ok' }));
 
 export default app;

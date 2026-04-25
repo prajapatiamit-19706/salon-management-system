@@ -1,5 +1,27 @@
-import axios from "axios";
+import { GoogleGenerativeAI } from "@google/generative-ai";
 import Chat from "../models/chat.model.js";
+
+const genAI = new GoogleGenerativeAI(process.env.GEMINI_API_KEY);
+
+// System prompt — customize this for your salon
+const SALON_SYSTEM_PROMPT = `You are a helpful AI assistant for "Glow & Grace" salon. 
+You help customers with:
+- Booking appointments
+- Information about services (haircut, facial, nail art, threading, waxing, etc.)
+- Pricing details
+- Working hours and location
+- General beauty advice
+
+Salon Details:
+- Name: Glow & Grace
+- Services: Haircut, Hair Color, Facial, Cleanup, Waxing, Threading, Nail Art, Manicure, Pedicure
+- Hours: Monday-Saturday 9AM to 8PM, Sunday 10AM to 6PM
+- Location: [Your Location]
+- Phone: [Your Phone]
+
+Always be friendly, professional and helpful. Keep responses concise and clear.
+If asked about booking, guide them to use the booking system on the website.
+Do not answer questions unrelated to the salon or beauty services.`;
 
 export const handleChat = async (req, res) => {
     const { message, userId } = req.body;
@@ -10,27 +32,46 @@ export const handleChat = async (req, res) => {
     }
 
     try {
-        // 2. Send to n8n Webhook with a timeout to prevent hanging
-        const n8nResponse = await axios.post(process.env.N8N_WEBHOOK_URL,
-            { message, userId },
-            { timeout: 30000 } // 30 second timeout for AI processing
-        );
+        // 2. Fetch previous chat history from MongoDB
+        let chatHistory = [];
+        try {
+            const existingChat = await Chat.findOne({ userId });
+            if (existingChat && existingChat.messages.length > 0) {
+                // Convert to Gemini format — last 10 messages only (to save tokens)
+                chatHistory = existingChat.messages
+                    .slice(-10)
+                    .map(msg => ({
+                        role: msg.role === 'assistant' ? 'model' : 'user',
+                        parts: [{ text: msg.content }]
+                    }));
+            }
+        } catch (dbError) {
+            console.error("MongoDB fetch error:", dbError);
+            // Continue without history
+        }
 
-        console.log("n8n response:", n8nResponse.data);
-        console.log("n8n full response:", JSON.stringify(n8nResponse.data));
-        console.log("n8n status:", n8nResponse.status);
+        // 3. Initialize Gemini model
+        const model = genAI.getGenerativeModel({
+            model: "gemini-1.5-flash",
+            systemInstruction: SALON_SYSTEM_PROMPT,
+        });
 
+        // 4. Start chat session with history
+        const chat = model.startChat({
+            history: chatHistory,
+            generationConfig: {
+                maxOutputTokens: 500,
+                temperature: 0.7,
+            },
+        });
 
-        // 3. Robust Data Extraction
-        // This checks for 'message', 'output', then 'reply' in case n8n structure changes
-        const botReply = n8nResponse.data?.message ||
-            n8nResponse.data?.[0]?.message ||
-            n8nResponse.data?.output ||
-            n8nResponse.data?.reply ||
-            n8nResponse.data?.[0]?.output ||
-            "I'm sorry, I couldn't process that right now.";
+        // 5. Send message and get response
+        const result = await chat.sendMessage(message);
+        const botReply = result.response.text();
 
-        // 4. Save to MongoDB (Don't let DB errors stop the response)
+        console.log("Gemini reply:", botReply);
+
+        // 6. Save to MongoDB
         try {
             await Chat.findOneAndUpdate(
                 { userId },
@@ -45,21 +86,18 @@ export const handleChat = async (req, res) => {
                 { upsert: true }
             );
         } catch (dbError) {
-            console.error("MongoDB Save Error:", dbError);
-            // We continue anyway so the user gets their reply
+            console.error("MongoDB save error:", dbError);
+            // Continue anyway
         }
 
-        // 5. Final Success Response
+        // 7. Send response
         return res.status(200).json({ reply: botReply });
 
     } catch (error) {
-        console.error("n8n/Controller Error:", error.message);
-
-        // Detailed error for debugging
-        const errorMessage = error.response?.data?.message || "Agent connection failed";
+        console.error("Gemini Error:", error.message);
         return res.status(500).json({
-            error: errorMessage,
-            details: "Ensure n8n workflow is active and URL is correct."
+            error: "AI service error",
+            details: error.message
         });
     }
 };
