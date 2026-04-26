@@ -1,7 +1,7 @@
 import { GoogleGenerativeAI } from "@google/generative-ai";
 import Chat from "../models/chat.model.js";
 
-const genAI = new GoogleGenerativeAI(process.env.GEMINI_API_KEY);
+const genAI = new GoogleGenerativeAI(process.env.GROQ_API_KEY);
 
 // System prompt — customize this for your salon
 const SALON_SYSTEM_PROMPT = `You are a helpful AI assistant for "Glow & Grace" salon. 
