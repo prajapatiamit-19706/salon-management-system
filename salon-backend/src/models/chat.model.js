@@ -2,7 +2,10 @@ import mongoose from "mongoose";
 
 const ChatSchema = new mongoose.Schema({
     userId: String,
-    messages: [{ role: String, content: String }],
+    messages: [{
+        role: { type: String, enum: ['user', 'assistant'] },
+        content: { type: String }
+    }],
     timestamp: { type: Date, default: Date.now }
 });
 
