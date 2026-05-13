@@ -4,9 +4,9 @@ export const Sidebar = ({ activeTab, setActiveTab }) => {
   const [mobileOpen, setMobileOpen] = useState(false);
 
   const menu = [
-    { id: "overview",      label: "Overview",          icon: "⊞" },
-    { id: "appointments",  label: "Appointments",       icon: "🗓" },
-    { id: "profile",       label: "Profile Settings",   icon: "⚙" },
+    { id: "overview", label: "Overview", icon: "⊞" },
+    { id: "appointments", label: "Appointments", icon: "🗓" },
+    { id: "profile", label: "Profile Settings", icon: "⚙" },
   ];
 
   // Close drawer when route changes
@@ -62,7 +62,7 @@ export const Sidebar = ({ activeTab, setActiveTab }) => {
               S
             </div>
             <div>
-              <p className="text-text-heading font-bold text-base leading-tight">Salon App</p>
+              <p className="text-text-heading font-bold text-base leading-tight">Glow & Grace</p>
               <p className="text-text-muted text-xs">Client Portal</p>
             </div>
           </div>
@@ -95,7 +95,7 @@ export const Sidebar = ({ activeTab, setActiveTab }) => {
           <span className="block w-10 h-0.5 bg-text-invert rounded-full" />
           <span className="block w-7 h-0.5 bg-text-invert rounded-full" />
           <span className="block w-10 h-0.5 bg-text-invert rounded-full" />
-           <span className="block w-7 h-0.5 bg-text-invert rounded-full" />
+          <span className="block w-7 h-0.5 bg-text-invert rounded-full" />
         </span>
       </button>
 
@@ -124,7 +124,7 @@ export const Sidebar = ({ activeTab, setActiveTab }) => {
               S
             </div>
             <div>
-              <p className="text-text-heading font-bold text-base leading-tight">Salon App</p>
+              <p className="text-text-heading font-bold text-base leading-tight">Glow & Grace</p>
               <p className="text-text-muted text-xs">Client Portal</p>
             </div>
           </div>
